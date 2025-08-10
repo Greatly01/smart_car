@@ -1,0 +1,5 @@
+string target  # 请求参数：目标标记（A/B/C/D/CAMP/WAIT）
+---
+bool success   # 响应结果：是否成功
+string message # 响应消息：状态描述
+
