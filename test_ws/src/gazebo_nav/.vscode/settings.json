@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/demo/gazebo_test_ws/devel/lib/python3/dist-packages",
+        "/home/demo/audio_ws/devel/lib/python3/dist-packages",
+        "/home/demo/桌面/catkin_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/demo/gazebo_test_ws/devel/lib/python3/dist-packages",
+        "/home/demo/audio_ws/devel/lib/python3/dist-packages",
+        "/home/demo/桌面/catkin_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}

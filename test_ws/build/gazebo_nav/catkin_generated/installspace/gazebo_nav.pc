@@ -1,0 +1,8 @@
+prefix=/home/demo/test_ws/install
+
+Name: gazebo_nav
+Description: Description of gazebo_nav
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lgazebo_nav
+Requires: rospy std_msgs message_runtime actionlib move_base_msgs
