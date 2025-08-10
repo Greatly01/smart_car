@@ -1,2 +1,2 @@
-gazebo_map:gazebo_nav:gazebo_pkg:jie_ware:pid_planner:robot:robot_transport:transport
+gazebo_map:gazebo_nav:gazebo_pkg:jie_ware:my_planner:pid_planner
 -DCATKIN_DEVEL_PREFIX=/home/demo/test_ws/devel -DCMAKE_INSTALL_PREFIX=/home/demo/test_ws/install -G Unix Makefiles

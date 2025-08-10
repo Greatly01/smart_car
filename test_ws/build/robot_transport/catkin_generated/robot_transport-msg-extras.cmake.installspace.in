@@ -1,2 +1,0 @@
-set(robot_transport_MESSAGE_FILES "")
-set(robot_transport_SERVICE_FILES "srv/TransportRequest.srv")

@@ -1,0 +1,50 @@
+<launch>
+  <!-- 定位 -->
+  <!-- <include file="$(find gazebo_nav)/launch/config/amcl/amcl_omni.launch" /> -->
+
+  <!-- <include file="$(find pid_planner)/nav_lidar/amcl_omni.launch" /> -->
+
+  <!-- <node pkg="jie_ware" type="lidar_loc" name="lidar_loc" >
+    <param name="base_frame" value="base_link" />
+    <param name="laser_frame" value="laser_frame" />
+  </node> -->
+
+
+    <!-- Run lidar_loc -->
+  <node pkg="jie_ware" type="lidar_loc" name="lidar_loc" >
+    <param name="base_frame" value="base_link" />
+    <param name="odom_frame" value="odom" />
+    <param name="laser_frame" value="laser_frame" />
+    <param name="laser_topic" value="scan" />
+  </node>
+
+  <!-- 包含 race.launch 文件 -->
+  <include file="$(find gazebo_pkg)/launch/shequ.launch" />
+
+  <!-- 启动地图服务器节点 -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find gazebo_map)/map/shequ.yaml"/>
+
+  <!-- 启动 move_base 节点 -->
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base"  output="screen">
+    <rosparam file="$(find pid_planner)/nav_lidar/costmap_common_params_shequ.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find pid_planner)/nav_lidar/costmap_common_params_shequ.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find pid_planner)/nav_lidar/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find pid_planner)/nav_lidar/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find pid_planner)/nav_lidar/local_planner_params.yaml" command="load" /> 
+   
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" /> 
+    <param name="use_dijkstra" value="true"/>
+    <param name="base_local_planner" value="pid_planner/PIDPlanner"/>
+    <!-- <param name="base_local_planner" value="wpbh_local_planner/WpbhLocalPlanner" /> -->
+    <param name= "controller_frequency" value="10" type="double"/>
+    <!-- <param name="base_local_planner" value="my_planner/MyPlanner"/> -->
+    
+  </node>
+
+  <!-- 启动 rviz 节点 -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find gazebo_nav)/rviz/demo.rviz" />
+
+  <node pkg="jie_ware" type="costmap_cleaner" name="costmap_cleaner"/>
+
+</launch>

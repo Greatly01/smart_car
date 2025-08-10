@@ -243,3 +243,140 @@ namespace pid_planner
 
 
 
+
+
+
+
+
+
+
+
+
+
+// #include "pid_planner.h"
+// #include <pluginlib/class_list_macros.h>
+// #include <opencv2/highgui/highgui.hpp>
+// #include <opencv2/imgproc/imgproc.hpp>
+// #include <tf/tf.h>
+// #include <tf/transform_listener.h>
+// #include <tf/transform_datatypes.h>
+
+// PLUGINLIB_EXPORT_CLASS( pid_planner::PIDPlanner, nav_core::BaseLocalPlanner)
+
+// // PID控制参数定义
+// double Kp = 1.4;  // 比例系数
+// double Ki = 0.0;  // 积分系数
+// double Kd = 1.6;  // 微分系数
+
+// // PID控制所需变量
+// double angular_error = 0;   // 当前误差
+// double last_error = 0;      // 上一次误差
+// double error_sum = 0;       // 误差累积
+// double error_diff = 0;      // 误差变化率
+// double output = 0;          // PID输出值
+
+// namespace pid_planner 
+// {
+//     PIDPlanner::PIDPlanner()
+//     {
+//         setlocale(LC_ALL,"");
+//     }
+//     PIDPlanner::~PIDPlanner()
+//     {}
+
+//     tf::TransformListener* tf_listener_;
+//     void PIDPlanner::initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros)
+//     {
+//         ROS_WARN("自制规划器初始化成功");
+//         tf_listener_ = new tf::TransformListener();
+//     }
+
+//     std::vector<geometry_msgs::PoseStamped> global_plan_;
+//     int target_index_;
+//     bool pose_adjusting_;
+//     bool goal_reached_;
+//     bool PIDPlanner::setPlan(const std::vector<geometry_msgs::PoseStamped>& plan)
+//     {
+//         target_index_ = 0;
+//         global_plan_ = plan;
+//         pose_adjusting_ = false;
+//         goal_reached_ = false;
+//         return true;
+//     }
+
+//     bool PIDPlanner::computeVelocityCommands(geometry_msgs::Twist& cmd_vel)
+//     {
+//         int final_index = global_plan_.size()-1;
+//         geometry_msgs::PoseStamped pose_final;
+//         global_plan_[final_index].header.stamp = ros::Time(0);
+//         tf_listener_->transformPose("base_link",global_plan_[final_index],pose_final);
+//         if(pose_adjusting_ == false)
+//         {
+//             double dx = pose_final.pose.position.x;
+//             double dy = pose_final.pose.position.y;
+//             double dist = std::sqrt(dx*dx + dy*dy);
+//             if(dist < 1.0)
+//                 pose_adjusting_ = true;
+//         }
+//         if(pose_adjusting_ == true)
+//         {
+//             goal_reached_ = true;
+//             ROS_WARN("到达终点！");
+//             return true;
+//         }
+
+//         geometry_msgs::PoseStamped target_pose;
+//         for(int i=target_index_;i<global_plan_.size();i++)
+//         {
+//             geometry_msgs::PoseStamped pose_base;
+//             global_plan_[i].header.stamp = ros::Time(0);
+//             tf_listener_->transformPose("base_link",global_plan_[i],pose_base);
+//             double dx = pose_base.pose.position.x;
+//             double dy = pose_base.pose.position.y;
+//             double dist = std::sqrt(dx*dx + dy*dy);
+
+//             if (dist > 0.8) 
+//             {
+//                 target_pose = pose_base;
+//                 target_index_ = i;
+//                 ROS_WARN("选择第 %d 个路径点作为临时目标，距离=%.2f",target_index_,dist);
+//                 break;
+//             }
+
+//             if(i == global_plan_.size()-1)
+//                 target_pose = pose_base; 
+//         }
+//         cmd_vel.linear.x = target_pose.pose.position.x * 4.2;
+
+//         // 计算误差
+//         angular_error = target_pose.pose.position.y;  // 目标值和当前值的差
+//         // 计算积分项
+//         error_sum += angular_error ;
+//         // 计算微分项
+//         error_diff = angular_error - last_error;
+//         // 计算PID控制器最终输出
+//         output = Kp * angular_error + Ki * error_sum + Kd * error_diff;
+//         // 角速度使用PID最终输出
+//         cmd_vel.angular.z = output;
+//         // 记录误差数值
+//         last_error = angular_error;
+
+
+//         return true;
+//     }
+//     bool PIDPlanner::isGoalReached()
+//     {
+//         return goal_reached_;
+//     } 
+// } // namespace pid_planner
+
+
+
+
+
+
+
+
+
+
+
