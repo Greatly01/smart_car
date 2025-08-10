@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>image_317.png</filename>
+	<path>/home/demo/yolov5-master/mydata/images/image_317.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1920</width>
+		<height>1080</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>xigua</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>699</xmin>
+			<ymin>516</ymin>
+			<xmax>1130</xmax>
+			<ymax>978</ymax>
+		</bndbox>
+	</object>
+</annotation>

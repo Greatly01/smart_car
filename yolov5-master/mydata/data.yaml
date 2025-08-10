@@ -1,0 +1,5 @@
+train: /home/demo/yolov5-master/mydata/image
+val: /home/demo/yolov5-master/mydata/image/
+
+nc: 3  # 类别数量
+names: ['apple', 'banana', 'orange']  # 类别名称
